@@ -36,3 +36,27 @@ h1 {
     flex-direction: column;
     gap: 15px;
 }
+/* Chat history styling */
+#chat-history {
+    height: 320px;
+    overflow-y: auto;
+    border: 1px solid #dedede;
+    border-radius: 6px;
+    padding: 15px;
+    background-color: #f7f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f7f9fa;
+}
+
+#chat-history::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chat-history::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 6px;
+}
+
