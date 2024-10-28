@@ -60,3 +60,28 @@ h1 {
     border-radius: 6px;
 }
 
+/* Message styling */
+#chat-history p {
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 80%;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Different styling for user and ELIZA messages */
+#chat-history p.user {
+    align-self: flex-end;
+    background-color: #cae4ff;
+    color: #1a73e8;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#chat-history p.eliza {
+    align-self: flex-start;
+    background-color: #ebebeb;
+    color: #333;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
