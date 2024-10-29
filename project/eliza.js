@@ -19,4 +19,20 @@ function elizaResponse() {
     
 }
 
+//Function to append messages to the chat history
+function appendMessage(sender, message, messageType) {
+    const chatHistory = document.getElementById("chat-history");
+    
+    //Create a new paragraph for the message
+    const messageElement = document.createElement("p");
+    messageElement.classList.add(messageType); // 'user' or 'eliza'
+    messageElement.innerHTML = `<b>${sender}:</b> ${message}`;
+
+    //Append the message to the chat history
+    chatHistory.appendChild(messageElement);
+    
+    //Auto-scroll
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+}
+
 
