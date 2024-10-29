@@ -35,4 +35,9 @@ function appendMessage(sender, message, messageType) {
     chatHistory.scrollTop = chatHistory.scrollHeight;
 }
 
+//function for ELIZA's response
+function generateElizaResponse(input) {
+    return "I'm here to listen. Please tell me more."; // Temporary response for now
+}
+
 
