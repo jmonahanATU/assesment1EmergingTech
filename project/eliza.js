@@ -25,7 +25,7 @@ function appendMessage(sender, message, messageType) {
     
     //Create a new paragraph for the message
     const messageElement = document.createElement("p");
-    messageElement.classList.add(messageType); // 'user' or 'eliza'
+    messageElement.classList.add(messageType); //user or eliza
     messageElement.innerHTML = `<b>${sender}:</b> ${message}`;
 
     //Append the message to the chat history
@@ -37,7 +37,15 @@ function appendMessage(sender, message, messageType) {
 
 //function for ELIZA's response
 function generateElizaResponse(input) {
-    return "I'm here to listen. Please tell me more."; // Temporary response for now
+    return "I'm here to listen. Please tell me more."; 
 }
+
+//Listen for Enter key to submit message, When pressed, it calls elizaResponse() to submit the message.
+document.getElementById("user-input").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        elizaResponse();
+    }
+});
+
 
 
