@@ -35,6 +35,13 @@ function appendMessage(sender, message, messageType) {
     chatHistory.scrollTop = chatHistory.scrollHeight;
 }
 
+// Listen for Enter key to submit the message
+document.getElementById("user-input").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        elizaResponse();
+    }
+});
+
 //function for ELIZA's response
 function generateElizaResponse(input) {
     input = input.toLowerCase().trim(); // Normalize input for consistent matching
