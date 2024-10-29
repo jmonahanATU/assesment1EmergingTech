@@ -26,6 +26,7 @@ h1 {
 
 /* Chat container styling */
 #chat-container {
+    margin-left: 40px;
     width: 90%;
     max-width: 500px;
     background-color: #ffffff;
