@@ -37,23 +37,33 @@ function appendMessage(sender, message, messageType) {
 
 //function for ELIZA's response
 function generateElizaResponse(input) {
-    input = input.toLowerCase().trim(); //Normalize input for consistent matching
-    
-    //pattern matching for ELIZA responses
+    input = input.toLowerCase().trim(); // Normalize input for consistent matching
+
+    // Enhanced pattern matching with more response variety
     if (input.includes("i feel")) {
-        return "Why do you feel that way?";
+        const feelingsResponses = [
+            "Why do you feel that way?",
+            "What do you think makes you feel this way?",
+            "Can you tell me more about these feelings?"
+        ];
+        return chooseRandom(feelingsResponses);
     } else if (input.includes("i am")) {
         return "Tell me more about being " + input.split("i am")[1].trim() + ".";
     } else if (input.includes("my")) {
         return "Your " + input.split("my")[1].trim() + "? Tell me more about that.";
     } else if (input.includes("because")) {
-        return "Is that the real reason?";
+        const becauseResponses = [
+            "Is that the real reason?",
+            "Why do you think that's the reason?",
+            "Is there anything else that contributes to that?"
+        ];
+        return chooseRandom(becauseResponses);
     } else if (input.includes("i want")) {
         return "Why do you want " + input.split("i want")[1].trim() + "?";
     } else if (input.includes("i think")) {
         return "Do you really think so?";
     } else if (input.includes("yes")) {
-        return "I'm glad to hear that!";
+        return "I'm glad to hear that! Can you explain more?";
     } else if (input.includes("no")) {
         return "Why not?";
     } else if (input.includes("you")) {
@@ -65,7 +75,13 @@ function generateElizaResponse(input) {
     } else if (input === "") {
         return "Please share what's on your mind.";
     } else {
-        return "Can you tell me more about that?";
+        const defaultResponses = [
+            "Can you tell me more about that?",
+            "How does that make you feel?",
+            "What makes you say that?",
+            "Let's talk more about that."
+        ];
+        return chooseRandom(defaultResponses);
     }
 }
 
