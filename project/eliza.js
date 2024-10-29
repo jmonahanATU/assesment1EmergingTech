@@ -85,6 +85,11 @@ function generateElizaResponse(input) {
     }
 }
 
+// Helper function to randomly select a response from an array
+function chooseRandom(responses) {
+    return responses[Math.floor(Math.random() * responses.length)];
+}
+
 //Listen for Enter key to submit message, When pressed, it calls elizaResponse() to submit the message.
 document.getElementById("user-input").addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
