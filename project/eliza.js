@@ -101,6 +101,29 @@ function generateElizaResponse(input) {
         return chooseRandom(shortResponses);
     }
 
+        // College/school/work-related responses
+    if (input.includes("college") || input.includes("work") || input.includes("school")) {
+        const workResponses = [
+            "What aspects are you finding most challenging?",
+            "How is this affecting you?",
+            "What specific concerns do you have about this?",
+            "How are you managing the workload?",
+            "Tell me more about your experiences with this."
+        ];
+        return chooseRandom(workResponses);  // Add return statement
+    }
+
+    // Time management responses
+    if (input.includes("time") || input.includes("busy") || input.includes("struggling")) {
+        const timeResponses = [
+            "What makes it difficult to manage your time?",
+            "How is this affecting your daily life?",
+            "What would help you feel more in control?",
+            "Have you tried any specific strategies?",
+            "What aspects are you finding most challenging?"
+        ];
+        return chooseRandom(timeResponses);  // Add return statement
+    }
      // Questions about direction of conversation
      if (input.includes("what should i") || input.includes("what shall i") || 
      input.includes("what do i") || input.includes("what can i")) {
