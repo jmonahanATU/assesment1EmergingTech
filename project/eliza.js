@@ -90,6 +90,54 @@ function generateElizaResponse(input) {
         }
     }
 
+    // Short responses handling
+    if (input.length <= 3) {
+        const shortResponses = [
+            "Could you elaborate on that?",
+            "Tell me more - what's on your mind?",
+            "I'm listening. Please share what you're thinking.",
+            "What brings you here today?"
+        ];
+        return chooseRandom(shortResponses);
+    }
+
+     // Questions about direction of conversation
+     if (input.includes("what should i") || input.includes("what shall i") || 
+     input.includes("what do i") || input.includes("what can i")) {
+     const directionResponses = [
+         "You could start by telling me about your day.",
+         "Perhaps you could share what's been on your mind recently?",
+         "Is there something specific that's bothering you?",
+         "What matters to you most right now?",
+         "You might tell me about something that's been affecting you lately."
+     ];
+     return chooseRandom(directionResponses);
+    }
+
+    // Handle confusion or unclear responses
+    if (input.includes("what?") || input.includes("what do you mean") || 
+    input.includes("i don't understand") || input.includes("unclear")) {
+    const clarificationResponses = [
+        "Let me rephrase - what brings you here today?",
+        "I'm here to listen to your thoughts and feelings. What would you like to discuss?",
+        "Sometimes it helps to start with what's been on your mind recently.",
+        "You could tell me about something that's important to you."
+    ];
+    return chooseRandom(clarificationResponses);
+    }
+
+     // Handle greetings and well-being questions
+     if (input.includes("how are you") || input.includes("and you") || 
+     input.includes("what about you")) {
+     const wellbeingResponses = [
+         "Thank you for asking. I'm here to help you explore your thoughts and feelings. How has your day been?",
+         "I appreciate your courtesy. Let's focus on you - what would you like to discuss?",
+         "That's kind of you to ask. I'm here to listen. What's been on your mind?",
+         "I'm here and ready to listen to you. What would you like to talk about?"
+     ];
+     return chooseRandom(wellbeingResponses);
+ }
+
     // Enhanced pattern matching with more response variety
     if (input.includes("i feel")) {
         const feelingsResponses = [
