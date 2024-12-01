@@ -125,3 +125,11 @@ h1 {
     align-items: center;
 }
 
+.intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
