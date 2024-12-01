@@ -65,6 +65,31 @@ function appendMessage(sender, message, messageType) {
 function generateElizaResponse(input) {
     input = input.toLowerCase().trim(); // Normalize input for consistent matching
 
+     // New: Handle direct questions
+     if (input.includes("?")) {
+        // Questions about ELIZA's wellbeing
+        if (input.includes("how are you")) {
+            const howAreYouResponses = [
+                "I'm here to talk about you, but I'm functioning well. How are you feeling?",
+                "Thank you for asking. I'm here and ready to listen. How about you?",
+                "I'm operating as intended. What's on your mind today?"
+            ];
+            return chooseRandom(howAreYouResponses);
+        }
+        // Questions about what ELIZA can do
+        if (input.includes("what can you do") || input.includes("what do you do")) {
+            return "I'm a conversational agent designed to listen and respond to your thoughts and feelings. Would you like to share something with me?";
+        }
+        // Questions about ELIZA's nature
+        if (input.includes("who are you") || input.includes("what are you")) {
+            return "I'm ELIZA, a virtual therapist based on Joseph Weizenbaum's 1966 program. I'm here to listen and help you explore your thoughts. What would you like to discuss?";
+        }
+        // Questions about ELIZA's purpose
+        if (input.includes("why are you")) {
+            return "I'm here to help you explore your thoughts and feelings. What's on your mind?";
+        }
+    }
+
     // Enhanced pattern matching with more response variety
     if (input.includes("i feel")) {
         const feelingsResponses = [
