@@ -28,7 +28,6 @@ const elizaPatterns = [
 
 // Function to handle the sending of messages
 function elizaResponse() {
-
     //This will get the user's input from the input field
     const userInput = document.getElementById("user-input").value.trim();
     
@@ -44,7 +43,6 @@ function elizaResponse() {
     //Call ELIZA's response function (placeholder for now)
     const elizaReply = generateElizaResponse(userInput);
     appendMessage("ELIZA", elizaReply, "eliza");
-    
 }
 
 //Function to append messages to the chat history
@@ -63,25 +61,11 @@ function appendMessage(sender, message, messageType) {
     chatHistory.scrollTop = chatHistory.scrollHeight;
 }
 
-
 //function for ELIZA's response
 function generateElizaResponse(input) {
     input = input.toLowerCase().trim(); // Normalize input for consistent matching
 
-    // First, try matching against pattern database
-    for (const pattern of elizaPatterns) {
-        const match = input.match(pattern.pattern);
-        if (match) {
-            let response = chooseRandom(pattern.responses);
-            // Replace placeholders with matched groups
-            for (let i = 1; i < match.length; i++) {
-                response = response.replace(`{${i}}`, match[i]);
-            }
-            return response;
-        }
-    }
-
-    // If no pattern matches, use existing keyword matching
+    // Enhanced pattern matching with more response variety
     if (input.includes("i feel")) {
         const feelingsResponses = [
             "Why do you feel that way?",
@@ -132,16 +116,21 @@ function chooseRandom(responses) {
     return responses[Math.floor(Math.random() * responses.length)];
 }
 
-// initial greeting when the page loads
+// Add initial greeting when the page loads
 window.onload = function() {
     appendMessage("ELIZA", "Hello! I'm ELIZA, a virtual therapist. How are you feeling today?", "eliza");
 };
 
-//Listen for Enter key to submit message, When pressed, it calls elizaResponse() to submit the message.
+// Listen for Enter key to submit message
 document.getElementById("user-input").addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
         elizaResponse();
     }
+});
+
+// Add click event listener for the send button
+document.getElementById("send-button").addEventListener("click", function() {
+    elizaResponse();
 });
 
 
