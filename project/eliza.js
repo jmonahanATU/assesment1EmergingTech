@@ -1,3 +1,31 @@
+// ELIZA Chatbot Core Patterns
+const elizaPatterns = [
+    {
+        pattern: /\b(i am|i'm) (.*)/i,
+        responses: [
+            "How long have you been {2}?",
+            "Do you believe it's normal to be {2}?",
+            "Why do you think you're {2}?"
+        ]
+    },
+    {
+        pattern: /\b(i feel|i am feeling) (.*)/i,
+        responses: [
+            "Tell me more about feeling {2}.",
+            "Why do you think you feel {2}?",
+            "How long have you felt {2}?"
+        ]
+    },
+    {
+        pattern: /\b(my) ([^.]*) (is|was) (.*)/i,
+        responses: [
+            "Tell me more about your {2}.",
+            "How do you feel about your {2}?",
+            "When did your {2} become {4}?"
+        ]
+    }
+];
+
 // Function to handle the sending of messages
 function elizaResponse() {
 
@@ -40,75 +68,52 @@ function appendMessage(sender, message, messageType) {
 function generateElizaResponse(input) {
     input = input.toLowerCase().trim(); // Normalize input for consistent matching
 
-    // Enhanced pattern matching with more response variety
-    if (input.includes("i feel") || input.includes("i am feeling")) {
-        const feeling = input.split(/i feel|i am feeling/)[1].trim();
+    // First, try matching against pattern database
+    for (const pattern of elizaPatterns) {
+        const match = input.match(pattern.pattern);
+        if (match) {
+            let response = chooseRandom(pattern.responses);
+            // Replace placeholders with matched groups
+            for (let i = 1; i < match.length; i++) {
+                response = response.replace(`{${i}}`, match[i]);
+            }
+            return response;
+        }
+    }
+
+    // If no pattern matches, use existing keyword matching
+    if (input.includes("i feel")) {
         const feelingsResponses = [
-            `Why do you feel ${feeling}?`,
-            `How long have you been feeling ${feeling}?`,
-            `Do you often feel ${feeling}?`,
+            "Why do you feel that way?",
+            "What do you think makes you feel this way?",
             "Can you tell me more about these feelings?"
         ];
         return chooseRandom(feelingsResponses);
-    } else if (input.includes("i am") || input.includes("i'm")) {
-        const state = input.split(/i am|i'm/)[1].trim();
-        const stateResponses = [
-            `How long have you been ${state}?`,
-            `What made you ${state}?`,
-            `Tell me more about being ${state}.`
-        ];
-        return chooseRandom(stateResponses);
+    } else if (input.includes("i am")) {
+        return "Tell me more about being " + input.split("i am")[1].trim() + ".";
     } else if (input.includes("my")) {
-        const topic = input.split("my")[1].trim();
-        const myResponses = [
-            `Your ${topic}? Tell me more about that.`,
-            `How do you feel about your ${topic}?`,
-            `When did you first notice your ${topic}?`
-        ];
-        return chooseRandom(myResponses);
+        return "Your " + input.split("my")[1].trim() + "? Tell me more about that.";
     } else if (input.includes("because")) {
         const becauseResponses = [
             "Is that the real reason?",
             "Why do you think that's the reason?",
-            "Is there anything else that contributes to that?",
-            "Are there other reasons you can think of?"
+            "Is there anything else that contributes to that?"
         ];
         return chooseRandom(becauseResponses);
     } else if (input.includes("i want")) {
-        const want = input.split("i want")[1].trim();
-        const wantResponses = [
-            `Why do you want ${want}?`,
-            `What would having ${want} mean to you?`,
-            `How long have you wanted ${want}?`
-        ];
-        return chooseRandom(wantResponses);
+        return "Why do you want " + input.split("i want")[1].trim() + "?";
     } else if (input.includes("i think")) {
-        return "What makes you think that?";
+        return "Do you really think so?";
     } else if (input.includes("yes")) {
-        const yesResponses = [
-            "You seem quite certain about that.",
-            "I see. Can you elaborate?",
-            "I'm glad to hear that! Can you explain more?"
-        ];
-        return chooseRandom(yesResponses);
+        return "I'm glad to hear that! Can you explain more?";
     } else if (input.includes("no")) {
-        const noResponses = [
-            "Why not?",
-            "What makes you say no?",
-            "Are you sure about that?"
-        ];
-        return chooseRandom(noResponses);
+        return "Why not?";
     } else if (input.includes("you")) {
         return "We are here to talk about you, not me.";
     } else if (input.includes("always")) {
         return "Can you think of a specific example?";
     } else if (input.includes("maybe")) {
-        const maybeResponses = [
-            "Why the uncertainty?",
-            "You don't seem sure about that.",
-            "What makes you uncertain?"
-        ];
-        return chooseRandom(maybeResponses);
+        return "Why the uncertainty?";
     } else if (input === "") {
         return "Please share what's on your mind.";
     } else {
@@ -116,10 +121,7 @@ function generateElizaResponse(input) {
             "Can you tell me more about that?",
             "How does that make you feel?",
             "What makes you say that?",
-            "Let's talk more about that.",
-            "What does that suggest to you?",
-            "I see. Please continue.",
-            "Can you elaborate on that?"
+            "Let's talk more about that."
         ];
         return chooseRandom(defaultResponses);
     }
