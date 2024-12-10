@@ -19,15 +19,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        
+
+      - name: Copy eliza contents to root
+        run: |
+          cp -r ./eliza/* .  # Copy all files from the eliza folder to the root
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.' 
-          
+          path: '.'  # Deploy from the root after copying
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
