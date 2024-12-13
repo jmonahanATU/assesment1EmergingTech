@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Or master, depending on your default branch
+      - main
 
 permissions:
   contents: read
@@ -23,10 +23,15 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
+      - name: Prepare deployment
+        run: |
+          mkdir _site
+          cp -r eliza/* _site/
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './eliza' 
+          path: '_site'
           
       - name: Deploy to GitHub Pages
         id: deployment
